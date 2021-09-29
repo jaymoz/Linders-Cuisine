@@ -1,0 +1,52 @@
+{% extends  'app/dashboard_link.html' %}
+{% load static %}
+
+{% block content %}
+
+<section style="margin-bottom:200px;" id="contact" class="section-wrapper contact-section" data-stellar-background-ratio="0.5">
+	<div class="parallax-overlay"></div>
+		<div class="container">
+
+				<div class="contact-details">
+					<!-- Contact Form -->
+					<div class="contact-form wow bounceInRight">
+						<div class="col-md-12">
+                            <div class="col-md-6 custom-sec-img wow fadeInDown">
+                                <img src="{{item.image.url}}" alt="Custom Image">
+                            </div>
+							<div class="dash__box dash__box--shadow dash__box--radius dash__box--bg-white col-md-6">
+							
+                                <div style="margin-top:20px;margin-bottom:20px;" class="container">
+                                    <p>{{item.name}}</p>
+                                    <hr>
+                                    {% if item.discount_price %}
+                                    <span style="display:inline-block; text-decoration: line-through;"><h5>₽{{item.price}}</h5></span>
+                                    <p style="display:inline-block; margin-left:5px;" id="price">₽{{item.discount_price}}</p>
+                                    <hr>
+                                    {% else %}
+                                    <p id="price">₽{{item.price}}</p>
+                                    <hr>
+                                    {% endif %}
+                                    <p><b>{{item.description|safe}}</b></p>
+                                    <hr>
+                                    {% if item.out_of_stock == True %}
+                                    <div align="center">
+                                      <label>Currently out of stock</label>
+                                    </div>
+                                  {% else %}
+                                    <a class="bootstrap btn btn-success" href="{% url 'add-item' item.slug %}">Add</a>
+                                    <a class="bootstrap btn btn-danger" href="{% url 'remove-item' item.slug %}">Remove</a>
+                                    {% endif %}
+                                    <hr>
+                                
+							</div>
+                        </div>
+					</div>
+					</div>
+
+			</div>
+		</div>
+	</div>
+	</section>
+
+	{% endblock %}
